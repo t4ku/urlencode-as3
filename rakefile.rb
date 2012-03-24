@@ -27,14 +27,15 @@ require 'asunit4'
 # Debug
 
 # Compile the debug swf
-mxmlc "bin/URLEncoder-debug.swf" do |t|
-  t.input = "src/URLEncoder.as"
+mxmlc "bin/URLEncodeRunner-debug.swf" do |t|
+  t.input = "src/urlencode/URIString.as"
+  t.source_path << "src"
   t.static_link_runtime_shared_libraries = true
   t.debug = true
 end
 
 desc "Compile and run the debug swf"
-flashplayer :run => "bin/URLEncoder-debug.swf"
+flashplayer :run => "bin/URLEncodeRunner-debug.swf"
 
 ##############################
 # Test
@@ -42,27 +43,27 @@ flashplayer :run => "bin/URLEncoder-debug.swf"
 library :asunit4
 
 # Compile the test swf
-mxmlc "bin/URLEncoder-test.swf" => :asunit4 do |t|
-  t.input = "src/URLEncoderRunner.as"
+mxmlc "bin/URLEncodeRunner-test.swf" => :asunit4 do |t|
+  t.input = "src/URLEncodeRunner.as"
   t.static_link_runtime_shared_libraries = true
   t.source_path << 'test'
   t.debug = true
 end
 
 desc "Compile and run the test swf"
-flashplayer :test => "bin/URLEncoder-test.swf"
+flashplayer :test => "bin/URLEncodeRunner-test.swf"
 
 ##############################
 # SWC
 
-compc "bin/URLEncoder.swc" do |t|
-  t.input_class = "URLEncoder"
+compc "bin/urlencode.swc" do |t|
+  t.input_class = "URIString"
   t.static_link_runtime_shared_libraries = true
   t.source_path << 'src'
 end
 
 desc "Compile the SWC file"
-task :swc => 'bin/URLEncoder.swc'
+task :swc => 'bin/urlencode.swc'
 
 ##############################
 # DOC
@@ -70,10 +71,11 @@ task :swc => 'bin/URLEncoder.swc'
 desc "Generate documentation at doc/"
 asdoc 'doc' do |t|
   t.doc_sources << "src"
-  t.exclude_sources << "src/URLEncoderRunner.as"
+  t.exclude_sources << "src/URLEncodeRunner.as"
 end
 
 ##############################
 # DEFAULT
-task :default => :run
+# task :default => :run
+task :default => :test
 
