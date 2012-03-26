@@ -36,3 +36,8 @@ public function doSomething():void{
 
 ```
 
+# TODO
+
+* Add escape(encode) function(Only SHIFT_JIS unescaping has been implemented
+  so far...).
+* Add charsets support other than SHIFT_JIS.
