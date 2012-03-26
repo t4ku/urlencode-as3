@@ -5,6 +5,7 @@ require 'bundler/setup'
 require 'rake/clean'
 require 'flashsdk'
 require 'asunit4'
+require "./asmock.rb"
 
 ##
 # Set USE_FCSH to true in order to use FCSH for all compile tasks.
@@ -41,10 +42,13 @@ flashplayer :run => "bin/URLEncodeRunner-debug.swf"
 # Test
 
 library :asunit4
+library :asmock
+library :asmock_asunit_integration
 
 # Compile the test swf
-mxmlc "bin/URLEncodeRunner-test.swf" => :asunit4 do |t|
+mxmlc "bin/URLEncodeRunner-test.swf" => [:asunit4,:asmock,:asmock_asunit_integration] do |t|
   t.input = "src/URLEncodeRunner.as"
+  t.includes << "asmock.integration.asunit.ASMockRunner"
   t.static_link_runtime_shared_libraries = true
   t.source_path << 'test'
   t.debug = true
