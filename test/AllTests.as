@@ -5,14 +5,11 @@ package {
      * If you modify it and run this script, your
      * modifications will be lost!
      */
-    import urlencode.handlers.SJISEncodeHandlerTest;
-    import urlencode.AbstractHandlerTest;
     
+    import urlencode.*;
     [Suite]
     public class AllTests {
-        public var urlencode_AbstractHandlerTest:urlencode.AbstractHandlerTest;
-        public var urlencode_handlers_SJISEncodeHandlerTest:urlencode.handlers.SJISEncodeHandlerTest;
-        
+        public var urlencode_URIStringTest:urlencode.URIStringTest;
     }
 }
 
