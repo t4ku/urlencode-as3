@@ -42,7 +42,7 @@ package urlencode {
         public function decode(destCharset:String):String{
             var twoDigitFmt:String = this.completeEncode(_us_string);
             return this.replaceEncodedSeg(twoDigitFmt,function(encString:String):String{
-                var encBytes:ByteArray = this.toEncBytes(encString);
+                var encBytes:ByteArray = toDecBytes(encString);
                 var decStr:String = encBytes.readMultiByte(encBytes.length,'shift_jis');
                 return decStr;
             });
